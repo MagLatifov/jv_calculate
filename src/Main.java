@@ -24,31 +24,50 @@ public class Main {
         //получаем два числа из вырадения, для этого дробим строку
         String[] data = exp.split("\\" + action);
 
+        if (data.length > 2) {
+            throw new Exception("Работаем только с двумя аргументами");
+        }
+
         System.out.println("Результат действия:  " + calculate(action, data) );
 
     }
 
     public static int calculate(char action, String[] data) {
-        int result;
+        int result = 0;
         return switch (action) {
             case '+' -> {
-                result = Integer.parseInt(data[0]) + Integer.parseInt(data[1]);
+                try {
+                   result = Integer.parseInt(data[0].trim()) + Integer.parseInt(data[1].trim());
+                } catch(NumberFormatException e) {
+                    System.out.println("Введены не целые числа.");
+                }
                 yield result;
             }
             case '-' -> {
-                result = Integer.parseInt(data[0]) - Integer.parseInt(data[1]);
+                try {
+                    result = Integer.parseInt(data[0].trim()) - Integer.parseInt(data[1].trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Введены не целые числа.");
+                }
                 yield result;
             }
             case '*' -> {
-                result = Integer.parseInt(data[0]) * Integer.parseInt(data[1]);
+                try {
+                    result = Integer.parseInt(data[0].trim()) * Integer.parseInt(data[1].trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Введены не целые числа.");
+                }
                 yield result;
             }
             case '/' -> {
-                result = Integer.parseInt(data[0]) / Integer.parseInt(data[1]);
+                try {
+                    result = Integer.parseInt(data[0].trim()) / Integer.parseInt(data[1].trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Введены не целые числа.");
+                }
                 yield result;
             }
             default -> {
-                result = 0;
                 yield result;
               }
         };
